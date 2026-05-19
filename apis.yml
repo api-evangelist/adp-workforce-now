@@ -51,6 +51,8 @@ apis:
         url: https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/showcase/adpworkforcenow
   - type: Website
     url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
   - type: Documentation
