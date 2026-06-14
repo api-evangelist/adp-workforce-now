@@ -1,74 +1,71 @@
 aid: adp-workforce-now
 name: ADP Workforce Now
-description: >-
-  ADP Workforce Now is ADP's cloud-based human capital management (HCM) suite
-  for mid-sized businesses, covering payroll, HR, benefits administration, time
-  and attendance, talent management, and analytics in a single platform. The
-  product offers tax filing, compliance reporting, mobile self-service, and
-  marketplace integrations through ADP's developer ecosystem. The ADP Workforce
-  Now APIs (HCM v2) use OAuth 2.0 / OpenID Connect with mutual TLS client
-  certificates and expose worker, payroll, time, benefits, and talent data
-  through ADP API Central.
+description: ADP Workforce Now is ADP's cloud-based human capital management (HCM)
+  suite for mid-sized businesses, covering payroll, HR, benefits administration, time
+  and attendance, talent management, and analytics in a single platform. The product
+  offers tax filing, compliance reporting, mobile self-service, and marketplace integrations
+  through ADP's developer ecosystem. The ADP Workforce Now APIs (HCM v2) use OAuth
+  2.0 / OpenID Connect with mutual TLS client certificates and expose worker, payroll,
+  time, benefits, and talent data through ADP API Central.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - HCM
-  - Human Capital Management
-  - Payroll
-  - HR
-  - Workforce Management
-  - Benefits
-  - Time and Attendance
-  - Talent Management
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/adp-workforce-now/refs/heads/main/apis.yml
+- HCM
+- Human Capital Management
+- Payroll
+- HR
+- Workforce Management
+- Benefits
+- Time and Attendance
+- Talent Management
+url: https://raw.githubusercontent.com/api-evangelist/adp-workforce-now/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: adp-workforce-now:hcm-api
-    name: ADP Workforce Now HCM API
-    description: >-
-      HCM v2 REST API for accessing worker demographics, payroll, time and
-      attendance, benefits, talent, and organization data in ADP Workforce Now.
-      Authentication uses OAuth 2.0 (client credentials) with mutual TLS client
-      certificates issued by ADP.
-    humanURL: https://developers.adp.com/build/api-explorer/hcm-offrg-wfn
-    baseURL: https://api.adp.com
-    tags:
-      - Workers
-      - Payroll
-      - Time and Attendance
-      - Benefits
-      - Talent
-      - Organization
-    properties:
-      - type: Documentation
-        url: https://developers.adp.com/build/api-explorer/hcm-offrg-wfn
-      - type: Developer Portal
-        url: https://developers.adp.com
-      - type: API Central
-        url: https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features
-
-common:
-  - type: LinkedIn
-    url: https://www.linkedin.com/showcase/adpworkforcenow
-  - type: Website
-    url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
+- aid: adp-workforce-now:hcm-api
+  name: ADP Workforce Now HCM API
+  description: HCM v2 REST API for accessing worker demographics, payroll, time and
+    attendance, benefits, talent, and organization data in ADP Workforce Now. Authentication
+    uses OAuth 2.0 (client credentials) with mutual TLS client certificates issued
+    by ADP.
+  humanURL: https://developers.adp.com/build/api-explorer/hcm-offrg-wfn
+  baseURL: https://api.adp.com
+  tags:
+  - Workers
+  - Payroll
+  - Time and Attendance
+  - Benefits
+  - Talent
+  - Organization
+  properties:
   - type: Documentation
-    url: https://developers.adp.com
+    url: https://developers.adp.com/build/api-explorer/hcm-offrg-wfn
   - type: Developer Portal
     url: https://developers.adp.com
-  - type: Pricing
-    url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
-  - type: SignUp
-    url: https://developers.adp.com/register
-  - type: Login
-    url: https://workforcenow.adp.com
-  - type: Marketplace
-    url: https://apps.adp.com
-  - type: Support
-    url: https://www.adp.com/contact-us/customer-service.aspx
+  - type: API Central
+    url: https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features
+  - url: graphql/adp-workforce-now-graphql.md
+    type: GraphQL
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/showcase/adpworkforcenow
+- type: Website
+  url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
+- type: Documentation
+  url: https://developers.adp.com
+- type: Developer Portal
+  url: https://developers.adp.com
+- type: Pricing
+  url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
+- type: SignUp
+  url: https://developers.adp.com/register
+- type: Login
+  url: https://workforcenow.adp.com
+- type: Marketplace
+  url: https://apps.adp.com
+- type: Support
+  url: https://www.adp.com/contact-us/customer-service.aspx
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

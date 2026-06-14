@@ -1,0 +1,1015 @@
+"""
+ADP Workforce Now HCM GraphQL Schema
+Conceptual schema derived from the ADP Workforce Now HCM v2 REST API.
+Authentication: OAuth 2.0 (client credentials) with mutual TLS.
+Base URL: https://api.adp.com
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar Date
+scalar DateTime
+scalar Decimal
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum WorkerStatusCode {
+  ACTIVE
+  INACTIVE
+  TERMINATED
+  LEAVE
+  SUSPENDED
+}
+
+enum WorkerTypeCode {
+  EMPLOYEE
+  CONTRACTOR
+  TEMPORARY
+  PART_TIME
+  FULL_TIME
+  INTERN
+}
+
+enum AssignmentStatusCode {
+  ACTIVE
+  INACTIVE
+  PENDING
+  ENDED
+}
+
+enum PayFrequencyCode {
+  WEEKLY
+  BIWEEKLY
+  SEMIMONTHLY
+  MONTHLY
+  ANNUAL
+}
+
+enum GoalStatusCode {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  ON_HOLD
+}
+
+enum CompetencyRatingCode {
+  EXCEEDS_EXPECTATIONS
+  MEETS_EXPECTATIONS
+  BELOW_EXPECTATIONS
+  NOT_RATED
+}
+
+enum LeaveTypeCode {
+  VACATION
+  SICK
+  PERSONAL
+  FMLA
+  MATERNITY
+  PATERNITY
+  BEREAVEMENT
+  MILITARY
+  JURY_DUTY
+  OTHER
+}
+
+enum WebhookEventTypeCode {
+  WORKER_HIRE
+  WORKER_TERMINATE
+  WORKER_TRANSFER
+  PAYROLL_RUN_COMPLETE
+  BENEFIT_ELECTION_CHANGE
+  TIME_ENTRY_SUBMITTED
+  LEAVE_REQUEST_APPROVED
+}
+
+# ─── Core Worker Types ───────────────────────────────────────────────────────
+
+type Worker {
+  workerID: ID!
+  associateOID: String
+  workerDetails: WorkerDetails
+  workerStatus: WorkerStatus
+  workerType: WorkerType
+  personName: PersonName
+  personAddresses: [PersonAddress]
+  communicationInfo: CommunicationInfo
+  assignment: Assignment
+  workerDates: WorkerDates
+  manager: Manager
+  organization: Organization
+  position: Position
+  department: Department
+  location: Location
+  costCenter: CostCenter
+  payroll: Payroll
+  timeAndAttendance: TimeAndAttendance
+  benefits: [Benefit]
+  performanceReviews: [PerformanceReview]
+  goals: [Goal]
+  trainings: [Training]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type WorkerDetails {
+  workerID: ID!
+  associateOID: String
+  workerStatus: WorkerStatus
+  workerType: WorkerType
+  birthDate: Date
+  genderCode: String
+  ethnicityCode: String
+  maritalStatusCode: String
+  citizenshipCountryCode: String
+  militaryStatusCode: String
+  disabilityCode: String
+  nationalID: String
+  customFields: [CustomField]
+}
+
+type WorkerStatus {
+  statusCode: WorkerStatusCode!
+  reasonCode: String
+  effectiveDate: Date
+  description: String
+}
+
+type WorkerType {
+  typeCode: WorkerTypeCode!
+  description: String
+  fullTimePartTimeIndicator: String
+  regularTemporaryCode: String
+}
+
+type WorkerDates {
+  originalHireDate: Date
+  hireDate: Date
+  rehireDate: Date
+  terminationDate: Date
+  expectedTerminationDate: Date
+  retirementDate: Date
+  seniorityDate: Date
+  benefitsCoverageDate: Date
+  adjustedServiceDate: Date
+}
+
+# ─── Name Types ─────────────────────────────────────────────────────────────
+
+type PersonName {
+  legalName: LegalName
+  preferredName: PreferredName
+  otherNames: [AlternateName]
+}
+
+type LegalName {
+  givenName: String
+  middleName: String
+  familyName1: String
+  familyName2: String
+  titleCode: String
+  suffixCode: String
+  formattedName: String
+}
+
+type PreferredName {
+  givenName: String
+  middleName: String
+  familyName1: String
+  nickName: String
+  formattedName: String
+}
+
+type AlternateName {
+  nameTypeCode: String
+  givenName: String
+  familyName1: String
+  formattedName: String
+}
+
+# ─── Contact / Address Types ─────────────────────────────────────────────────
+
+type PersonAddress {
+  addressTypeCode: String!
+  lineOne: String
+  lineTwo: String
+  lineThree: String
+  cityName: String
+  countrySubdivisionLevel1: String
+  countrySubdivisionLevel2: String
+  postalCode: String
+  countryCode: String
+  effectiveDate: Date
+  primaryIndicator: Boolean
+}
+
+type CommunicationInfo {
+  emails: [WorkerEmail]
+  phones: [WorkerPhone]
+  socialNetworks: [SocialNetwork]
+  instantMessages: [InstantMessage]
+}
+
+type WorkerEmail {
+  emailTypeCode: String!
+  emailUri: String!
+  primaryIndicator: Boolean
+  notificationIndicator: Boolean
+}
+
+type WorkerPhone {
+  phoneTypeCode: String!
+  countryDialing: String
+  areaDialing: String
+  dialNumber: String
+  extension: String
+  primaryIndicator: Boolean
+  formattedPhone: String
+}
+
+type SocialNetwork {
+  networkTypeCode: String
+  uri: String
+}
+
+type InstantMessage {
+  channelTypeCode: String
+  uri: String
+}
+
+# ─── Assignment Types ────────────────────────────────────────────────────────
+
+type Assignment {
+  assignmentID: ID!
+  workerID: ID!
+  assignmentDetails: AssignmentDetails
+  assignmentStatus: AssignmentStatus
+  baseRemuneration: BaseRemuneration
+  payGrade: PayGrade
+  payRange: PayRange
+  jobCode: JobCode
+  position: Position
+  department: Department
+  location: Location
+  costCenter: CostCenter
+  manager: Manager
+  team: Team
+  flsaStatusCode: String
+  workScheduleCode: String
+  customFields: [CustomField]
+}
+
+type AssignmentDetails {
+  assignmentID: ID!
+  hireDate: Date
+  seniorityDate: Date
+  adjustedServiceDate: Date
+  positionID: String
+  jobTitle: String
+  businessUnitCode: String
+  primaryIndicator: Boolean
+}
+
+type AssignmentStatus {
+  statusCode: AssignmentStatusCode!
+  reasonCode: String
+  effectiveDate: Date
+  description: String
+}
+
+# ─── Remuneration / Pay Types ─────────────────────────────────────────────
+
+type BaseRemuneration {
+  annualRateAmount: Decimal
+  hourlyRateAmount: Decimal
+  dailyRateAmount: Decimal
+  weeklyRateAmount: Decimal
+  biweeklyRateAmount: Decimal
+  monthlyRateAmount: Decimal
+  currencyCode: String
+  effectiveDate: Date
+  payFrequency: PayFrequency
+}
+
+type PayFrequency {
+  frequencyCode: PayFrequencyCode!
+  description: String
+  payPeriodsPerYear: Int
+}
+
+type PayGrade {
+  gradeCode: String!
+  description: String
+  effectiveDate: Date
+}
+
+type PayRange {
+  minimumRate: Decimal
+  midpointRate: Decimal
+  maximumRate: Decimal
+  currencyCode: String
+  effectiveDate: Date
+}
+
+# ─── Payroll Types ──────────────────────────────────────────────────────────
+
+type Payroll {
+  payrollID: ID!
+  workerID: ID!
+  payrollDetails: PayrollDetails
+  earningCodes: [EarningCode]
+  deductionCodes: [DeductionCode]
+  taxWithholdings: [TaxWithholding]
+  directDeposits: [DirectDeposit]
+  paycheckDelivery: PaycheckDelivery
+  recentPayrollRuns: [PayrollRun]
+}
+
+type PayrollDetails {
+  payrollID: ID!
+  payGroupCode: String
+  payFrequency: PayFrequency
+  payrollFrequency: PayrollFrequency
+  flsaStatusCode: String
+  garnishmentIndicator: Boolean
+  localTaxCode: String
+  stateTaxCode: String
+  federalFilingStatusCode: String
+}
+
+type PayrollRun {
+  payrollRunID: ID!
+  payPeriodStartDate: Date!
+  payPeriodEndDate: Date!
+  checkDate: Date!
+  grossPay: Decimal
+  netPay: Decimal
+  federalTaxWithheld: Decimal
+  stateTaxWithheld: Decimal
+  currencyCode: String
+  runStatusCode: String
+  workerPayments: [WorkerPayment]
+}
+
+type PayrollFrequency {
+  frequencyCode: PayFrequencyCode!
+  description: String
+  annualPayPeriods: Int
+}
+
+type WorkerPayment {
+  workerID: ID!
+  grossAmount: Decimal
+  netAmount: Decimal
+  currencyCode: String
+  earnings: [EarningLine]
+  deductions: [DeductionLine]
+  taxes: [TaxLine]
+}
+
+type EarningLine {
+  earningCode: String
+  description: String
+  hours: Decimal
+  rate: Decimal
+  amount: Decimal
+}
+
+type DeductionLine {
+  deductionCode: String
+  description: String
+  amount: Decimal
+}
+
+type TaxLine {
+  taxTypeCode: String
+  description: String
+  amount: Decimal
+  jurisdictionCode: String
+}
+
+type PaycheckDelivery {
+  deliveryTypeCode: String!
+  description: String
+  addressLine1: String
+  cityName: String
+  stateCode: String
+  postalCode: String
+  countryCode: String
+}
+
+type EarningCode {
+  earningCodeID: ID!
+  codeValue: String!
+  description: String
+  earningTypeCode: String
+  overtimeIndicator: Boolean
+  activeIndicator: Boolean
+}
+
+type DeductionCode {
+  deductionCodeID: ID!
+  codeValue: String!
+  description: String
+  deductionTypeCode: String
+  prePostTaxCode: String
+  activeIndicator: Boolean
+}
+
+type TaxWithholding {
+  taxWithholdingID: ID!
+  taxTypeCode: String!
+  jurisdictionCode: String!
+  filingStatusCode: String
+  allowances: Int
+  additionalAmount: Decimal
+  exemptIndicator: Boolean
+  effectiveDate: Date
+}
+
+type DirectDeposit {
+  depositID: ID!
+  priority: Int!
+  bankAccountTypecode: String
+  bankRoutingTransitNumber: String
+  bankAccountNumber: String
+  depositAmount: Decimal
+  depositPercent: Decimal
+  remainderIndicator: Boolean
+  allocationDetails: AllocationDetails
+}
+
+type AllocationDetails {
+  allocationType: String
+  allocationAmount: Decimal
+  allocationPercent: Decimal
+  remainderIndicator: Boolean
+}
+
+# ─── Time and Attendance Types ───────────────────────────────────────────────
+
+type TimeAndAttendance {
+  workerID: ID!
+  scheduledShifts: [ScheduledShift]
+  timeEntries: [TimeEntry]
+  timeCards: [TimeCard]
+  ptoBalances: [PTO]
+  leaveRequests: [LeaveRequest]
+}
+
+type ScheduledShift {
+  shiftID: ID!
+  workerID: ID!
+  scheduledStartDateTime: DateTime!
+  scheduledEndDateTime: DateTime!
+  scheduledHours: Decimal
+  locationCode: String
+  positionCode: String
+  shiftTypeCode: String
+  publishedIndicator: Boolean
+}
+
+type TimeEntry {
+  timeEntryID: ID!
+  workerID: ID!
+  entryDate: Date!
+  startTime: DateTime
+  stopTime: DateTime
+  hoursWorked: Decimal
+  earningCode: String
+  positionCode: String
+  costCenterCode: String
+  submittedIndicator: Boolean
+  approvedIndicator: Boolean
+  notes: String
+}
+
+type TimeCard {
+  timeCardID: ID!
+  workerID: ID!
+  payPeriodStartDate: Date!
+  payPeriodEndDate: Date!
+  totalRegularHours: Decimal
+  totalOvertimeHours: Decimal
+  totalHours: Decimal
+  approvalStatus: String
+  timeEntries: [TimeEntry]
+}
+
+type PTO {
+  ptoID: ID!
+  workerID: ID!
+  leaveTypeCode: String!
+  description: String
+  availableBalance: Decimal
+  pendingBalance: Decimal
+  usedYTD: Decimal
+  accrualRatePerPeriod: Decimal
+  unitCode: String
+  asOfDate: Date
+}
+
+type LeaveRequest {
+  leaveRequestID: ID!
+  workerID: ID!
+  leaveType: LeaveTypeCode!
+  requestedStartDate: Date!
+  requestedEndDate: Date!
+  approvedStartDate: Date
+  approvedEndDate: Date
+  requestedDays: Decimal
+  approvedDays: Decimal
+  statusCode: String
+  reasonCode: String
+  notes: String
+  submittedDate: DateTime
+  approvedDate: DateTime
+  leaveBalance: LeaveBalance
+}
+
+type LeaveBalance {
+  leaveTypeCode: String!
+  availableBalance: Decimal
+  usedBalance: Decimal
+  pendingBalance: Decimal
+  unitCode: String
+  asOfDate: Date
+}
+
+# ─── Benefits Types ──────────────────────────────────────────────────────────
+
+type Benefit {
+  benefitID: ID!
+  workerID: ID!
+  benefitPlan: BenefitPlan
+  benefitElection: BenefitElection
+  enrollment: Enrollment
+  coverageStartDate: Date
+  coverageEndDate: Date
+  statusCode: String
+}
+
+type BenefitElection {
+  electionID: ID!
+  workerID: ID!
+  benefitPlanID: ID!
+  electionTypeCode: String!
+  coverageLevel: BenefitCoverage
+  employeeContribution: Decimal
+  employerContribution: Decimal
+  currencyCode: String
+  effectiveDate: Date
+  enrollmentDate: Date
+  waiveIndicator: Boolean
+  dependentCoverage: [DependentCoverage]
+}
+
+type BenefitPlan {
+  planID: ID!
+  planName: String!
+  planTypeCode: String!
+  carrierName: String
+  groupNumber: String
+  planYear: Int
+  openEnrollmentStartDate: Date
+  openEnrollmentEndDate: Date
+  employeeContributionMin: Decimal
+  employeeContributionMax: Decimal
+  employerContribution: Decimal
+  coverageOptions: [BenefitCoverage]
+}
+
+type BenefitCoverage {
+  coverageID: ID!
+  coverageTypeCode: String!
+  description: String
+  employeeOnly: Boolean
+  employeeSpouse: Boolean
+  employeeChildren: Boolean
+  employeeFamily: Boolean
+  employeePremium: Decimal
+  employerPremium: Decimal
+  currencyCode: String
+}
+
+type Enrollment {
+  enrollmentID: ID!
+  workerID: ID!
+  planID: ID!
+  enrollmentDate: Date!
+  effectiveDate: Date!
+  statusCode: String
+  electionTypeCode: String
+  enrollmentMethodCode: String
+}
+
+type DependentCoverage {
+  dependentID: ID!
+  relationshipTypeCode: String!
+  firstName: String
+  lastName: String
+  birthDate: Date
+  genderCode: String
+}
+
+# ─── Performance and Talent Types ────────────────────────────────────────────
+
+type PerformanceReview {
+  reviewID: ID!
+  workerID: ID!
+  reviewPeriodStartDate: Date!
+  reviewPeriodEndDate: Date!
+  reviewTypeCode: String
+  overallRatingCode: String
+  overallRatingDescription: String
+  reviewerWorkerID: ID
+  statusCode: String
+  completedDate: Date
+  goals: [Goal]
+  competencies: [Competency]
+  notes: String
+}
+
+type Goal {
+  goalID: ID!
+  workerID: ID!
+  goalName: String!
+  description: String
+  goalStatus: GoalStatus
+  startDate: Date
+  targetDate: Date
+  completedDate: Date
+  weightPercent: Decimal
+  progressPercent: Decimal
+  alignedToOrgGoal: Boolean
+}
+
+type GoalStatus {
+  statusCode: GoalStatusCode!
+  description: String
+  lastUpdated: DateTime
+}
+
+type Competency {
+  competencyID: ID!
+  competencyName: String!
+  description: String
+  categoryCode: String
+  rating: CompetencyRating
+  evidenceNotes: String
+}
+
+type CompetencyRating {
+  ratingCode: CompetencyRatingCode!
+  numericValue: Decimal
+  description: String
+  reviewerComments: String
+}
+
+type Training {
+  trainingID: ID!
+  workerID: ID!
+  courseID: ID
+  course: LearningCourse
+  completionDate: Date
+  expirationDate: Date
+  statusCode: String
+  score: Decimal
+  creditHours: Decimal
+  completionMethodCode: String
+  certificateNumber: String
+}
+
+type LearningCourse {
+  courseID: ID!
+  courseName: String!
+  description: String
+  courseTypeCode: String
+  durationHours: Decimal
+  providerName: String
+  categoryCode: String
+  mandatoryIndicator: Boolean
+  activeIndicator: Boolean
+  createdDate: Date
+  lastModifiedDate: Date
+}
+
+# ─── Organization Types ──────────────────────────────────────────────────────
+
+type Organization {
+  organizationID: ID!
+  organizationName: String!
+  shortName: String
+  orgChart: OrgChart
+  departments: [Department]
+  locations: [Location]
+  costCenters: [CostCenter]
+  positions: [Position]
+  jobs: [Job]
+  teams: [Team]
+}
+
+type OrgChart {
+  organizationID: ID!
+  levelCode: String
+  parentOrganizationID: ID
+  childOrganizations: [Organization]
+  workerCount: Int
+  activeDate: Date
+}
+
+type Department {
+  departmentID: ID!
+  departmentCode: String!
+  departmentName: String!
+  parentDepartmentID: ID
+  costCenterCode: String
+  locationCode: String
+  managerWorkerID: ID
+  activeIndicator: Boolean
+  effectiveDate: Date
+}
+
+type Position {
+  positionID: ID!
+  positionCode: String!
+  positionTitle: String!
+  jobCode: JobCode
+  departmentID: ID
+  locationID: ID
+  costCenterID: ID
+  maximumFilledCount: Int
+  currentFilledCount: Int
+  vacancyCount: Int
+  fullTimeEquivalent: Decimal
+  activeIndicator: Boolean
+  effectiveDate: Date
+}
+
+type Location {
+  locationID: ID!
+  locationCode: String!
+  locationName: String!
+  locationTypeCode: String
+  address: PersonAddress
+  timeZoneCode: String
+  activeIndicator: Boolean
+}
+
+type CostCenter {
+  costCenterID: ID!
+  costCenterCode: String!
+  costCenterName: String!
+  parentCostCenterID: ID
+  companyCode: String
+  activeIndicator: Boolean
+  effectiveDate: Date
+}
+
+type Job {
+  jobID: ID!
+  jobCode: JobCode!
+  jobTitle: String!
+  jobFamily: String
+  jobLevel: String
+  flsaStatusCode: String
+  eeocCategoryCode: String
+  payGrade: PayGrade
+  payRange: PayRange
+  activeIndicator: Boolean
+  effectiveDate: Date
+}
+
+type JobCode {
+  codeValue: String!
+  shortName: String
+  longName: String
+  effectiveDate: Date
+}
+
+type Team {
+  teamID: ID!
+  teamName: String!
+  teamTypeCode: String
+  managerWorkerID: ID
+  members: [Worker]
+  memberCount: Int
+  organizationID: ID
+  departmentID: ID
+  activeIndicator: Boolean
+}
+
+type Manager {
+  workerID: ID!
+  associateOID: String
+  managerTypeCode: String
+  firstName: String
+  lastName: String
+  emailUri: String
+  positionTitle: String
+  departmentName: String
+}
+
+# ─── API / Integration Types ─────────────────────────────────────────────────
+
+type APIKey {
+  keyID: ID!
+  clientID: String!
+  clientName: String
+  scopeList: [String]
+  issuedDate: DateTime
+  expirationDate: DateTime
+  statusCode: String
+  environment: String
+}
+
+type Token {
+  tokenID: ID!
+  accessToken: String!
+  tokenTypeCode: String
+  expiresIn: Int
+  scope: String
+  issuedAt: DateTime
+  expiresAt: DateTime
+}
+
+type WebhookEvent {
+  eventID: ID!
+  eventTypeCode: WebhookEventTypeCode!
+  eventDateTime: DateTime!
+  eventCorrelationID: String
+  serviceCode: String
+  payloadData: String
+  workerID: ID
+  subscriptionID: ID
+  deliveryStatusCode: String
+  retryCount: Int
+}
+
+type Subscription {
+  subscriptionID: ID!
+  subscriberName: String!
+  callbackURL: String!
+  eventTypes: [WebhookEventTypeCode!]!
+  secretKey: String
+  statusCode: String
+  createdDate: DateTime
+  lastModifiedDate: DateTime
+  activeIndicator: Boolean
+}
+
+# ─── Utility Types ───────────────────────────────────────────────────────────
+
+type CustomField {
+  fieldID: ID!
+  fieldName: String!
+  fieldTypeCode: String
+  stringValue: String
+  numericValue: Decimal
+  dateValue: Date
+  booleanValue: Boolean
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type WorkerConnection {
+  nodes: [Worker]
+  pageInfo: PageInfo!
+}
+
+# ─── Root Types ──────────────────────────────────────────────────────────────
+
+type Query {
+  worker(workerID: ID!): Worker
+  workers(
+    statusCode: WorkerStatusCode
+    departmentID: ID
+    locationID: ID
+    first: Int
+    after: String
+  ): WorkerConnection
+
+  assignment(assignmentID: ID!): Assignment
+  payrollRun(payrollRunID: ID!): PayrollRun
+  payrollRuns(
+    payPeriodStartDate: Date
+    payPeriodEndDate: Date
+    first: Int
+  ): [PayrollRun]
+
+  timeCard(timeCardID: ID!): TimeCard
+  leaveRequest(leaveRequestID: ID!): LeaveRequest
+  leaveRequests(workerID: ID, statusCode: String): [LeaveRequest]
+
+  benefit(benefitID: ID!): Benefit
+  benefitPlan(planID: ID!): BenefitPlan
+  benefitPlans(planTypeCode: String): [BenefitPlan]
+
+  performanceReview(reviewID: ID!): PerformanceReview
+  performanceReviews(workerID: ID, statusCode: String): [PerformanceReview]
+
+  organization(organizationID: ID!): Organization
+  department(departmentID: ID!): Department
+  departments(organizationID: ID): [Department]
+  position(positionID: ID!): Position
+  positions(departmentID: ID, activeOnly: Boolean): [Position]
+  location(locationID: ID!): Location
+  locations: [Location]
+  job(jobID: ID!): Job
+  jobs(activeOnly: Boolean): [Job]
+  team(teamID: ID!): Team
+  teams(organizationID: ID): [Team]
+
+  earningCodes(activeOnly: Boolean): [EarningCode]
+  deductionCodes(activeOnly: Boolean): [DeductionCode]
+  learningCourses(mandatoryOnly: Boolean): [LearningCourse]
+  webhookSubscriptions: [Subscription]
+}
+
+type Mutation {
+  createLeaveRequest(
+    workerID: ID!
+    leaveType: LeaveTypeCode!
+    startDate: Date!
+    endDate: Date!
+    notes: String
+  ): LeaveRequest
+
+  updateLeaveRequest(
+    leaveRequestID: ID!
+    statusCode: String!
+    approvedStartDate: Date
+    approvedEndDate: Date
+    notes: String
+  ): LeaveRequest
+
+  submitTimeCard(timeCardID: ID!): TimeCard
+
+  createTimeEntry(
+    workerID: ID!
+    entryDate: Date!
+    startTime: DateTime
+    stopTime: DateTime
+    earningCode: String
+    notes: String
+  ): TimeEntry
+
+  updateBenefitElection(
+    workerID: ID!
+    planID: ID!
+    coverageLevelCode: String!
+    waiveIndicator: Boolean
+  ): BenefitElection
+
+  createGoal(
+    workerID: ID!
+    goalName: String!
+    description: String
+    targetDate: Date
+    weightPercent: Decimal
+  ): Goal
+
+  updateGoal(
+    goalID: ID!
+    goalStatus: GoalStatusCode
+    progressPercent: Decimal
+    completedDate: Date
+    notes: String
+  ): Goal
+
+  createWebhookSubscription(
+    subscriberName: String!
+    callbackURL: String!
+    eventTypes: [WebhookEventTypeCode!]!
+    secretKey: String
+  ): Subscription
+
+  deleteWebhookSubscription(subscriptionID: ID!): Boolean
+
+  createDirectDeposit(
+    workerID: ID!
+    priority: Int!
+    bankRoutingTransitNumber: String!
+    bankAccountNumber: String!
+    bankAccountTypeCode: String!
+    depositAmount: Decimal
+    depositPercent: Decimal
+    remainderIndicator: Boolean
+  ): DirectDeposit
+
+  updateTaxWithholding(
+    workerID: ID!
+    taxTypeCode: String!
+    jurisdictionCode: String!
+    filingStatusCode: String
+    allowances: Int
+    additionalAmount: Decimal
+    exemptIndicator: Boolean
+  ): TaxWithholding
+}
