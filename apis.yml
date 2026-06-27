@@ -41,7 +41,7 @@ apis:
   properties:
   - type: Documentation
     url: https://developers.adp.com/build/api-explorer/hcm-offrg-wfn
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developers.adp.com
   - type: API Central
     url: https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features
@@ -54,11 +54,11 @@ common:
   url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
 - type: Documentation
   url: https://developers.adp.com
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developers.adp.com
 - type: Pricing
   url: https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx
-- type: SignUp
+- type: Signup
   url: https://developers.adp.com/register
 - type: Login
   url: https://workforcenow.adp.com
