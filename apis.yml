@@ -48,6 +48,10 @@ apis:
   - url: graphql/adp-workforce-now-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/adp-workforce-now-domain-security.yml
+- url: https://www.adp.com/~/spark_feed/insights-trends
+  type: Blog
 - type: LinkedIn
   url: https://www.linkedin.com/showcase/adpworkforcenow
 - type: Website
