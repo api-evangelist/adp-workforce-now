@@ -22,6 +22,14 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adp-workforce-now.png
 tags:
 - HCM
+- Payroll
+- HR
+- Workforce Management
+- Benefits
+- Time and Attendance
+- Talent Management
+tags_raw:
+- HCM
 - Human Capital Management
 - Payroll
 - HR
