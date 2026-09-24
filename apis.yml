@@ -75,8 +75,6 @@ apis:
     url: https://developers.adp.com
   - type: API Central
     url: https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features
-  - url: graphql/adp-workforce-now-graphql.md
-    type: GraphQL
 common:
 - type: DomainSecurity
   url: security/adp-workforce-now-domain-security.yml
