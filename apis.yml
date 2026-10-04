@@ -39,6 +39,7 @@ tags:
 - Benefits
 - Time and Attendance
 - Talent Management
+- Employee Benefits
 tags_raw:
 - HCM
 - Human Capital Management
@@ -48,6 +49,7 @@ tags_raw:
 - Benefits
 - Time and Attendance
 - Talent Management
+- Employee Benefits
 url: https://raw.githubusercontent.com/api-evangelist/adp-workforce-now/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-05-11'
