@@ -27,5 +27,5 @@
     - connectors/applications/adp-workforce-now
     vendor_link: https://www.workforcenow.adp.com/
     builder: Fivetran
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
