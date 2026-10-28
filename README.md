@@ -1,4 +1,4 @@
-# ADP Workforce Now (adp-workforce-now)
+# ADP Workforce Now
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,66 +66,91 @@
 
 ADP Workforce Now is ADP's cloud-based human capital management (HCM) suite for mid-sized businesses, covering payroll, HR, benefits administration, time and attendance, talent management, and analytics in a single platform. The product offers tax filing, compliance reporting, mobile self-service, and marketplace integrations through ADP's developer ecosystem. The ADP Workforce Now APIs (HCM v2) use OAuth 2.0 / OpenID Connect with mutual TLS client certificates and expose worker, payroll, time, benefits, and talent data through ADP API Central.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/adp-workforce-now/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/adp-workforce-now/refs/heads/main/apis.yml)
+**Areas:** HCM · Payroll · Human Resources · Workforce Management · Benefits · Time and Attendance · Talent Management · Employee Benefits
 
-## Scope
+## ADP Workforce Now on APIs.io
 
-- **Type:** Index
+Everything profiled for ADP Workforce Now is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adp-workforce-now/](https://apis.io/providers/adp-workforce-now/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- HCM
-- Human Capital Management
-- Payroll
-- HR
-- Workforce Management
-- Benefits
-- Time and Attendance
-- Talent Management
+- [ADP Workforce Now HCM API](https://apis.io/apis/adp-workforce-now/hcm-api/) — HCM v2 REST API for accessing worker demographics, payroll, time and attendance, benefits, talent, and organization data in ADP Workforce Now.…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### ADP Workforce Now HCM API
+GraphQL schemas.
 
-HCM v2 REST API for accessing worker demographics, payroll, time and attendance, benefits, talent, and organization data in ADP Workforce Now. Authentication uses OAuth 2.0 (client credentials) with mutual TLS client certificates issued by ADP.
+- [Moved to /providers/adp-workforce-now/](https://apis.io/graphqls/adp-workforce-now/adp-workforce-now-graphql/)
 
-- **Human URL:** [https://developers.adp.com/build/api-explorer/hcm-offrg-wfn](https://developers.adp.com/build/api-explorer/hcm-offrg-wfn)
-- **Base URL:** `https://api.adp.com`
+#### Security (1)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Workers
-- Payroll
-- Time and Attendance
-- Benefits
-- Talent
-- Organization
+- [Adp Workforce Now Domain Security](https://apis.io/security/adp-workforce-now/adp-workforce-now-domain-security/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://developers.adp.com/build/api-explorer/hcm-offrg-wfn)
-- [Developer  Portal](https://developers.adp.com)
-- [A P I  Central](https://apps.adp.com/en-US/apps/410612/adp-api-central-for-adp-workforce-now-and-adp-workforce-now-next-generation/features)
-- [Graph Q L](graphql/adp-workforce-now-graphql.md)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/showcase/adpworkforcenow)
 - [Website](https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx)
 - [Documentation](https://developers.adp.com)
-- [Developer  Portal](https://developers.adp.com)
 - [Pricing](https://www.adp.com/what-we-offer/products/adp-workforce-now.aspx)
-- [Sign Up](https://developers.adp.com/register)
-- [Login](https://workforcenow.adp.com)
-- [Marketplace](https://apps.adp.com)
 - [Support](https://www.adp.com/contact-us/customer-service.aspx)
+- [Blog](https://www.adp.com/~/spark_feed/insights-trends)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 9.5** — minimal · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 7.1 |
+| Access clarity | 17.1 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Employment & Payroll
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adp-workforce-now/](https://apis.io/providers/adp-workforce-now/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ADP Workforce Now: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adp-workforce-now/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
